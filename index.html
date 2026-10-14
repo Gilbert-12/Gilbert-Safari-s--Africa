@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#075c3b"><meta name="description" content="Explore East African destinations, wildlife, culture and travel planning."><link rel="manifest" href="manifest.json"><title>Gilbert Safari's Africa</title>
+<style>
+:root{--g:#075c3b;--gold:#f3b72f;--ink:#17342a;--muted:#60756c;--line:#e1e9e3}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial,sans-serif;background:#f5f8f4;color:var(--ink)}
+header{background:linear-gradient(130deg,#043d2b,#08754a);color:white;padding:22px 17px;border-radius:0 0 22px 22px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border:2px solid var(--gold);border-radius:16px;display:grid;place-items:center;font-size:28px;background:#e6bd43}
+h1{font-size:21px;margin:0}.tag{color:#ffdc78;font-weight:700}header p{font-size:13px;margin:6px 0 0;color:#e5f3e9}
+main{max-width:760px;margin:auto;padding:14px 13px 90px}.search{display:flex;gap:8px;margin:14px 0}.search input{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;font:inherit}
+button{font:inherit;cursor:pointer}.btn{border:0;background:var(--g);color:white;border-radius:11px;padding:11px 14px;font-weight:700}.secondary{background:#e6f3ea;color:var(--g)}
+h2{font-size:18px;margin:20px 0 10px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile,.card,.panel{background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden}.tile{text-align:left;padding:13px;min-height:100px;color:var(--ink)}.tile span{font-size:25px;display:block;margin-bottom:7px}.tile strong{display:block;font-size:14px}.tile small,.hint{color:var(--muted);font-size:12px}
+.cards{display:grid;grid-template-columns:1fr;gap:11px}.card .pic{height:90px;background:linear-gradient(120deg,#d9ebcf,#83b98b);display:grid;place-items:center;font-size:43px}.body{padding:12px}.body h3{margin:0 0 5px;font-size:16px}.body p,.panel p{font-size:13px;line-height:1.5;color:#4e665b}.pill{display:inline-block;padding:4px 8px;background:#e8f5ec;border-radius:18px;color:var(--g);font-size:11px;font-weight:700}
+.panel{padding:15px;margin:10px 0}.panel label{display:block;font-weight:700;font-size:13px;margin:10px 0 5px}.panel input,.panel select,.panel textarea{width:100%;padding:11px;border:1px solid #cddbd1;border-radius:10px;font:inherit}.result{background:#eaf5ec;padding:12px;border-radius:11px;margin-top:12px;font-size:14px;line-height:1.5}.hidden{display:none!important}.back{border:0;background:none;color:var(--g);font-weight:800;padding:5px 0 10px}
+nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 2px calc(8px + env(safe-area-inset-bottom))}nav button{flex:1;border:0;background:none;color:var(--muted);font-size:11px;padding:4px 0}nav span{display:block;font-size:20px}nav .active{color:var(--g);font-weight:800}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 5px}@media(min-width:580px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media print{nav,.search,.btn,.back{display:none!important}body{background:white}main{padding:0}}
+</style></head>
+<body>
+<header><div class="brand"><div class="logo">🐘</div><div><h1>Gilbert Safari's Africa</h1><div class="tag">Explore · Discover · Experience</div></div></div><p>Your East African tourism and travel companion</p></header>
+<main>
+<section id="home"><div class="search"><input id="q" placeholder="Search places, wildlife, culture…" aria-label="Search"><button class="btn" id="search">Search</button></div>
+<h2>Explore by category</h2><div class="grid">
+<button class="tile" data-page="destinations"><span>🏞️</span><strong>Destinations</strong><small>Parks, lakes and mountains</small></button>
+<button class="tile" data-page="wildlife"><span>🦁</span><strong>Wildlife & Nature</strong><small>Mammals, birds and primates</small></button>
+<button class="tile" data-page="culture"><span>🥁</span><strong>Culture & Heritage</strong><small>Traditions, museums and food</small></button>
+<button class="tile" data-page="planner"><span>🗺️</span><strong>Trip Planner</strong><small>Plan an itinerary and budget</small></button>
+<button class="tile" data-page="services"><span>🏨</span><strong>Travel Services</strong><small>Accommodation, guides, transport</small></button>
+<button class="tile" data-page="about"><span>🌍</span><strong>About the app</strong><small>Explore East Africa responsibly</small></button></div>
+<h2>Featured destinations</h2><div id="featured" class="cards"></div></section>
+<section id="other" class="hidden"><button class="back" id="back">← Back to home</button><h2 id="title">Explore</h2><div id="content"></div></section>
+<footer>Gilbert Safari's Africa · Learn, explore and support local communities.<br>Prototype: live bookings, maps and payments are not connected.</footer></main>
+<nav><button class="active" data-page="home"><span>⌂</span>Home</button><button data-page="destinations"><span>🏞️</span>Places</button><button data-page="wildlife"><span>🐾</span>Wildlife</button><button data-page="planner"><span>🗺️</span>Plan</button><button data-page="services"><span>☰</span>More</button></nav>
+<script>
+const data={
+destinations:[
+["Bwindi Impenetrable National Park","Uganda","🦍","Forest habitat known for mountain gorillas and rich biodiversity."],
+["Murchison Falls National Park","Uganda","🐘","Savannah wildlife, the Nile River and a dramatic waterfall."],
+["Maasai Mara National Reserve","Kenya","🦓","Open grasslands and abundant wildlife; conditions vary by season."],
+["Serengeti National Park","Tanzania","🦁","Vast plains and seasonal movements of grazing animals."],
+["Volcanoes National Park","Rwanda","🌋","Volcanic mountain scenery and regulated gorilla trekking."],
+["Mount Kilimanjaro","Tanzania","🏔️","A famous high-altitude climb requiring preparation and guidance."],
+["Lake Victoria","Uganda, Kenya & Tanzania","🌊","Freshwater lake, fishing traditions and lakeside communities."],
+["Zanzibar","Tanzania","🏖️","Coastal scenery, historic Stone Town and Swahili heritage."]],
+wildlife:[
+["Mountain gorillas","Uganda & Rwanda","🦍","Great apes in forest habitats; visits require official permits."],
+["African elephants","East Africa","🐘","Large herbivores that shape habitats and disperse seeds."],
+["Lions","Savannah ecosystems","🦁","Social cats that often live in groups called prides."],
+["Giraffes","East African savannahs","🦒","Tall browsing mammals adapted to feeding on tree leaves."],
+["Birds","East Africa","🦜","Resident and migratory birds live in forests, wetlands and savannahs."],
+["Chimpanzees","Uganda & Tanzania","🐒","Intelligent, social primates living in forest communities."]],
+culture:[
+["Traditional dances","East Africa","🥁","Music and dance express identity, history and celebration."],
+["Museums & monuments","East Africa","🏛️","Explore archaeology, history, art and the people who shaped the region."],
+["Traditional foods","East Africa","🍲","Discover local dishes and food traditions; ask about ingredients."],
+["Local communities","East Africa","🤝","Choose respectful community-led experiences and ask before taking photos."]],
+services:[
+["Accommodation","Hotels, lodges and campsites","🛏️","Research places to stay near your destination and confirm current rates."],
+["Tour guides","Local tourism professionals","🧭","Check qualifications, services, costs and inclusions before booking."],
+["Transport","Buses, transfers, car hire and flights","🚐","Compare routes, travel times, safety and prices."],
+["Responsible travel","Respect nature and culture","🌱","Follow park rules, avoid disturbing wildlife and support local businesses."]]};
+const labels={destinations:"Destinations",wildlife:"Wildlife & Nature",culture:"Culture & Heritage",services:"Travel Services"};
+function card(x,kind){return `<article class="card"><div class="pic">${x[2]}</div><div class="body"><span class="pill">${kind}</span><h3>${x[0]}</h3><div class="hint">📍 ${x[1]}</div><p>${x[3]}</p><button class="btn secondary full" data-detail="${encodeURIComponent(x[0])}" data-kind="${kind}">Learn more</button></div></article>`}
+function cards(arr,kind){return `<div class="cards">${arr.map(x=>card(x,kind)).join("")}</div>`}
+document.getElementById("featured").innerHTML=cards(data.destinations.slice(0,4),"Destination");
+function page(p){document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===p));document.getElementById("home").classList.toggle("hidden",p!=="home");document.getElementById("other").classList.toggle("hidden",p==="home");if(p==="home")return;document.getElementById("title").textContent=labels[p]||({planner:"Trip Planner",about:"About Gilbert Safari's Africa"}[p]);let c=document.getElementById("content");
+if(data[p])c.innerHTML=cards(data[p],labels[p]);
+else if(p==="planner")c.innerHTML=`<div class="panel"><h3>Plan your trip</h3><p>Make a simple budget estimate. This prototype does not book travel or save data online.</p><label>Trip name</label><input id="tripname" placeholder="e.g. Uganda wildlife trip"><label>Country</label><select id="country"><option>Uganda</option><option>Kenya</option><option>Tanzania</option><option>Rwanda</option><option>Multiple countries</option></select><label>Number of days</label><input id="days" type="number" min="1" max="365" value="3"><label>Number of travellers</label><input id="people" type="number" min="1" max="100" value="1"><label>Estimated budget per person per day (UGX)</label><input id="daily" type="number" min="0" value="150000"><button class="btn full" id="estimate" style="margin-top:12px">Estimate budget</button><div id="result" class="result hidden"></div><button class="btn secondary full" onclick="window.print()" style="margin-top:8px">Print / save plan</button></div>`;
+else c.innerHTML=`<div class="panel"><div style="font-size:48px;text-align:center">🌍</div><h3>Our mission</h3><p>Gilbert Safari's Africa is a tourism app concept to help travellers and students discover East Africa's natural beauty, wildlife, culture and heritage.</p><p>We aim to encourage responsible tourism, learning and support for local communities across Uganda, Kenya, Tanzania, Rwanda and beyond.</p><p><strong>Prototype status:</strong> live maps, accounts, verified prices, bookings and payments are not connected yet.</p><button class="btn full" data-page="destinations">Start exploring</button></div>`;window.scrollTo(0,0)}
+document.addEventListener("click",e=>{let p=e.target.closest("[data-page]");if(p){page(p.dataset.page);return}if(e.target.id==="back"){page("home");return}
+let d=e.target.closest("[data-detail]");if(d){let kind=d.dataset.kind,name=decodeURIComponent(d.dataset.detail),arr=Object.values(data).flat(),x=arr.find(v=>v[0]===name);document.getElementById("title").textContent=name;document.getElementById("content").innerHTML=`<button class="back" id="back">← Back</button><div class="panel"><div style="font-size:55px;text-align:center">${x[2]}</div><h3>${x[0]}</h3><p><strong>${x[1]}</strong></p><p>${x[3]}</p><p><strong>Before you go:</strong> Check official opening arrangements, fees, transport, safety guidance and local rules before departure.</p></div>`;window.scrollTo(0,0)}
+if(e.target.id==="estimate"){let days=Number(document.getElementById("days").value),people=Number(document.getElementById("people").value),daily=Number(document.getElementById("daily").value),r=document.getElementById("result");if(!Number.isInteger(days)||days<1||days>365||!Number.isInteger(people)||people<1||people>100||!Number.isFinite(daily)||daily<0){r.textContent="Enter valid days, travellers and a non-negative daily budget."}else{r.innerHTML=`<strong>${document.getElementById("tripname").value||"Your trip"}</strong><br>${document.getElementById("country").value} · ${days} day(s) · ${people} traveller(s)<br><strong>Estimated total: UGX ${(days*people*daily).toLocaleString("en-UG")}</strong><br><small>This is a rough estimate only; actual costs vary.</small>`}r.classList.remove("hidden")}}
+);
+function search(){let q=document.getElementById("q").value.trim().toLowerCase();if(!q){page("destinations");return}let all=Object.entries(data).flatMap(([k,a])=>a.map(x=>({...{x,k}}))).filter(o=>o.x.join(" ").toLowerCase().includes(q));document.getElementById("home").classList.add("hidden");document.getElementById("other").classList.remove("hidden");document.getElementById("title").textContent="Search results";document.getElementById("content").innerHTML=all.length?all.map(o=>card(o.x,labels[o.k].replace(" & Nature","").replace(" & Heritage",""))).join(""):`<div class="panel">No results found. Try a destination, animal or cultural topic.</div>`;window.scrollTo(0,0)}
+document.getElementById("search").addEventListener("click",search);document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")search()});
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
+</script></body></html>
